@@ -59,21 +59,5 @@ class EmployeeControllerTest {
 	 {
 		 //Employee employee=
 	 }
-	 /* @Test
-	 public void testDeleteEmployeeById() throws Exception{
-		 String URI = "/api/v2/deleteEmployee/{id}";
-		 Employee employee=new Employee();
-		  employee.setEmployeeId(1);
-		  employee.setEmployeeName("ammu");
-		  employee.setEmployeePhone("9701531212");
-		  employee.setEmployeeEmail("amrutha@gmail.com");
-		 
-		  Mockito.when(managerService.findEmployeeById(Mockito.any())).thenReturn(employee);
-	        Mockito.when(managerService.deleteEmployeeById(Mockito.any())).thenReturn(true);
-	        MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.delete(URI, 1).accept(MediaType.APPLICATION_JSON)).andReturn();
-	        MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
-
-	        Assert.assertEquals(HttpStatus.OK.value(), mockHttpServletResponse.getStatus());
-	 }*/
-
+	
 }
