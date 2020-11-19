@@ -1,0 +1,79 @@
+package com.tca.time.controller;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Date;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tca.time.controller.ManagerController;
+import com.tca.time.exception.ResourceNotFoundException;
+import com.tca.time.model.Employee;
+import com.tca.time.model.Manager;
+import com.tca.time.services.ManagerService;
+
+
+
+
+
+
+@RunWith(SpringRunner.class)
+@WebMvcTest(value = ManagerController.class)
+public class ManagerControllerTest {
+	
+	@Autowired
+    private MockMvc mockMvc;
+	
+	@MockBean
+    private ManagerService managerService;
+	
+	 @Test
+	   public void testNewManager() throws Exception{
+		  String URI = "/api/v2/CreateManager";
+		  Manager manager=new Manager();
+		  manager.setManagerId(2);
+		  manager.setManagerName("RAJU");
+		  manager.setManagerEmail("chiku@gmail.com");
+		  manager.setManagerPhone("08512518301");
+		  String jsonInput = this.converttoJson(manager);
+
+		  Mockito.when(managerService.createManager(Mockito.any(Manager.class))).thenReturn(manager);
+		  MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.post(URI).accept(MediaType.APPLICATION_JSON).content(jsonInput).contentType(MediaType.APPLICATION_JSON))
+	                .andReturn();
+		  MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
+	        String jsonOutput = mockHttpServletResponse.getContentAsString();
+	        assertThat(jsonInput).isEqualTo(jsonOutput);
+	        Assert.assertEquals(HttpStatus.OK.value(), mockHttpServletResponse.getStatus());
+	 }
+	 
+	 
+	 
+
+	  /**
+     * Convert Object into Json String by using Jackson ObjectMapper
+     * @param ticket
+     * @return
+     * @throws JsonProcessingException
+     */
+    private String converttoJson(Object manager) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(manager);
+    }
+
+}
