@@ -1,22 +1,12 @@
 package com.tca.time.services.impl;
-
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.tca.time.exception.ResourceNotFoundException;
 import com.tca.time.model.Manager;
 import com.tca.time.repository.ManagerRepository;
 import com.tca.time.services.ManagerService;
-
-
-
 
 @Service
 @Transactional

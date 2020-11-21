@@ -23,19 +23,19 @@ class EmployeeServiceImplTest {
 	  public void testCreateEmployee() throws Exception{
 		  Employee employee=new Employee();
 	    	employee.setEmployeeId(3);
-	    	employee.setEmployeeName("usha");
-	    	employee.setEmployeeEmail("ushareddy@gmail.com");
+	    	employee.setEmployeeName("amrutha");
+	    	employee.setEmployeeEmail("amrutha@gmail.com");
 	    	employee.setEmployeePhone("9550355319");
 	    	 Mockito.when(employeeRepository.save(employee)).thenReturn(employee);
 	    	 assertThat(employeeService.createEmployee(employee)).isEqualTo(employee);
 	  }
 	@Test
-    public void testGetAllEmployee() throws Exception{
+    public void testGetAllEmployees() throws Exception{
     	Employee employee1=new Employee();
     	employee1.setEmployeeId(1);
-    	employee1.setEmployeeName("usha");
-    	employee1.setEmployeeEmail("ushareddy@gmail.com");
-    	employee1.setEmployeePhone("9550355319");
+    	employee1.setEmployeeName("amrutha");
+    	employee1.setEmployeeEmail("amrutha@gmail.com");
+    	employee1.setEmployeePhone("9701531212");
 
     	Employee employee2=new Employee();
     	employee2.setEmployeeId(2);
@@ -52,16 +52,29 @@ class EmployeeServiceImplTest {
         assertThat(employeeService.getAllEmployee()).isEqualTo(employeelist);
     }
 	@Test
-    public void testDeleteEmployeeById() throws Exception{
+    public void testDeleteEmployee() throws Exception{
 	  
 	  Employee employee=new Employee();
     	employee.setEmployeeId(2);
-    	employee.setEmployeeName("Marina");
-    	employee.setEmployeeEmail("marinas@gmail.com");
-    	employee.setEmployeePhone("9550355319");
+    	employee.setEmployeeName("amrutha");
+    	employee.setEmployeeEmail("amrutha@gmail.com");
+    	employee.setEmployeePhone("9701531212");
     	 employeeRepository.deleteById(employee.getEmployeeId());
     	 System.out.println(employeeRepository.findById(2));
     	 Assert.assertTrue(employeeRepository.findById(2).isEmpty());                
     }
+	@Test
+	public void testUpdateEmployee() throws Exception{
+		Employee employee2=new Employee();
+    	employee2.setEmployeeId(6);
+    	employee2.setEmployeeName("amrutha");
+    	employee2.setEmployeeEmail("amrutha@gmail.com");
+    	employee2.setEmployeePhone("9701531212");
+    	
+    	  Mockito.when(employeeRepository.save(employee2)).thenReturn(employee2);
+    	  Mockito.when(employeeRepository.findById(6).get()).thenReturn(employee2);
+    	  
+    	  Assert.assertTrue(employeeRepository.findById(6).isEmpty());
   
+}
 }

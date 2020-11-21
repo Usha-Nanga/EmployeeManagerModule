@@ -25,6 +25,6 @@ public class Myswaggerconfig {
 
 			@SuppressWarnings("deprecation")
 			private ApiInfo metadata() {
-				return new ApiInfoBuilder().title("TimeCardApp").description("API reference guide for developers").termsOfServiceUrl("https://www.javacodegeeks.com/").contact("Batra, Yatin").version("1.0").build();	
+				return new ApiInfoBuilder().title("TimeCardEmployeeManagerModule").description("API reference guide for developers").termsOfServiceUrl("https://www.javacodegeeks.com/").contact("Batra, Yatin").version("1.0").build();	
 			}
 }

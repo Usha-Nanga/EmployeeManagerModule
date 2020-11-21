@@ -1,27 +1,18 @@
 package com.tca.time.repository;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import com.tca.time.model.Manager;
-import com.tca.time.repository.EmployeeRepository;
-import com.tca.time.repository.ManagerRepository;
 
 
 
@@ -60,6 +51,43 @@ public class ManagerRepositoryTest {
 	        Assert.assertEquals(managers.size(), 1);
 
 	    }
-	    
+	    @Test
+	    public void testGetAllManagers() throws Exception{
+	    	Manager manager1=new Manager();
+	    	manager1.setManagerId(1);
+	    	manager1.setManagerName("MARINA");
+	    	manager1.setManagerEmail("marinas@gmail.com");
+	    	manager1.setManagerPhone("08512");
+	    	
+	    	Manager manager2=new Manager();
+	    	manager2.setManagerId(0);
+	    	manager2.setManagerName("MARINA");
+	    	manager2.setManagerEmail("marinas@gmail.com");
+	    	manager2.setManagerPhone("08512");
+	    	
+	    	 testEntityManager.persist(manager1);
+	    	 testEntityManager.persist(manager2);
+	    	 
+	    	 //Retrieve all managers
+		     
+	    	 List<Manager> managerlist = (List<Manager>)ManagerRepository.findAll();
+		        Assert.assertEquals(2, managerlist.size());
+	    }
+	    @Test
+	    public void testUpdateManager(){
+
+	    	Manager manager2=new Manager();
+	    	manager2.setManagerId(0);
+	    	manager2.setManagerName("MARINA");
+	    	manager2.setManagerEmail("marinas@gmail.com");
+	    	manager2.setManagerPhone("08512");
+	    	
+	    	 testEntityManager.persist(manager2);
+	    	 Manager  getFromDb =ManagerRepository.findById(0).get();
+	    	 getFromDb.setManagerId(1);
+	    	 testEntityManager.persist(getFromDb);
+	    	 
+	    	 assertThat(getFromDb.getManagerId()).isEqualTo(1);
+	    }
 
 }
