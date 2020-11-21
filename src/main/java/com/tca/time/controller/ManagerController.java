@@ -1,6 +1,9 @@
 package com.tca.time.controller;
 
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.tca.time.exception.ResourceNotFoundException;
 import com.tca.time.model.Manager;
 import com.tca.time.services.ManagerService;
@@ -20,7 +22,7 @@ import com.tca.time.services.ManagerService;
 @RestController
 @RequestMapping("/api/v2")
 public class ManagerController {
-	
+	private static final Logger logger = LogManager.getLogger(ManagerController.class);
 	@Autowired
 	private ManagerService managerService;
 
@@ -30,9 +32,9 @@ public class ManagerController {
 	} 
 	
 	@PutMapping("/Manager/{id}")
-	public ResponseEntity<ResponseEntity<Manager>> updateManager(@PathVariable(value = "id") Integer managerId,
+	public ResponseEntity<Manager> updateManager(@PathVariable(value = "id") Integer managerId,
 			 @RequestBody Manager managerDetails) throws ResourceNotFoundException {
-		ResponseEntity<Manager> manager = managerService.updateManager(managerId, managerDetails);
+		Manager manager = managerService.updateManager(managerId, managerDetails);
 		return  ResponseEntity.ok(manager);
 	}
 

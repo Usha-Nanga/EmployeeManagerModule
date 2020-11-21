@@ -2,6 +2,9 @@ package com.tca.time.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -35,9 +38,9 @@ class EmployeeControllerTest {
 		  String URI = "/api/v2/CreateEmployee";
 		  Employee employee=new Employee();
 		  employee.setEmployeeId(1);
-		  employee.setEmployeeName("ammu");
+		  employee.setEmployeeName("amrutha");
 		  employee.setEmployeePhone("9701531212");
-		  employee.setEmployeeEmail("amrutha@gmail.com");
+		  employee.setEmployeeEmail("ammu@gmail.com");
 		  String jsonInput = this.converttoJson(employee);
 
 		  Mockito.when(employeeService.createEmployee(Mockito.any(Employee.class))).thenReturn(employee);
@@ -55,9 +58,63 @@ class EmployeeControllerTest {
 	    }
 	 
 	 @Test
-	 public void testDeleteEmployee()
-	 {
-		 //Employee employee=
-	 }
-	
+	 public void testDeleteEmployeeById() throws Exception{
+		 String URI = "/api/v2/Employee/{id}";
+		 Employee employee=new Employee();
+	    	employee.setEmployeeId(3);
+	    	employee.setEmployeeName("amrutha");
+	    	employee.setEmployeeEmail("ammu@gmail.com");
+	    	employee.setEmployeePhone("9550355319");
+	    	employeeService.deleteEmployee(employee.getEmployeeId());//.getCompanyManagerId());
+	  }
+
+	    @Test
+	    public void testGetAllEmployees() throws Exception{
+	    	
+	    	String URI= "/api/v2/Employee";
+	    	Employee employee1=new Employee();
+	    	employee1.setEmployeeId(3);
+	    	employee1.setEmployeeName("amrutha");
+	    	employee1.setEmployeeEmail("ammu@gmail.com");
+	    	employee1.setEmployeePhone("9550355319");
+
+	    	Employee employee2=new Employee();
+	    	employee2.setEmployeeId(1);
+	    	employee2.setEmployeeName("amrutha");
+	    	employee2.setEmployeeEmail("ammu@gmail.com");
+	    	employee2.setEmployeePhone("9550355319");
+
+	       List<Employee> employeelist=new ArrayList<>();
+	       employeelist.add(employee1);
+	       employeelist.add(employee2);
+	       String jsonInput = this.converttoJson(employeelist);
+	       
+	       Mockito.when(employeeService.getAllEmployee()).thenReturn(employeelist);
+	       MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get(URI).accept(MediaType.APPLICATION_JSON)).andReturn();
+	        MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
+	        String jsonOutput = mockHttpServletResponse.getContentAsString();
+
+	        assertThat(jsonInput).isEqualTo(jsonOutput);
+	  
+	    }
+	    @Test
+	    public void testUpdateEmployee() throws Exception{
+	    	
+	     String URI= "/api/v2/Employee/{id}";
+	     Employee employee=new Employee();
+	    	employee.setEmployeeId(3);
+	    	employee.setEmployeeName("amrutha");
+	    	employee.setEmployeeEmail("ammu@gmail.com");
+	    	employee.setEmployeePhone("9550355319");
+	    	 String jsonInput = this.converttoJson(employee);
+	    	 
+	    	Mockito.when(employeeService.updateEmployee(Mockito.any(), Mockito.any())).thenReturn(employee);
+	    	 MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.put(URI, 3).accept(MediaType.APPLICATION_JSON).content(jsonInput).contentType(MediaType.APPLICATION_JSON))
+	                 .andReturn();
+	         MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
+	         String jsonOutput = mockHttpServletResponse.getContentAsString();
+
+	         assertThat(jsonInput).isEqualTo(jsonOutput);
+
+	    }
 }

@@ -2,7 +2,8 @@ package com.tca.time.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -22,16 +22,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tca.time.controller.ManagerController;
-import com.tca.time.exception.ResourceNotFoundException;
-import com.tca.time.model.Employee;
 import com.tca.time.model.Manager;
 import com.tca.time.services.ManagerService;
-
-
-
-
-
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = ManagerController.class)
@@ -62,7 +54,64 @@ public class ManagerControllerTest {
 	        Assert.assertEquals(HttpStatus.OK.value(), mockHttpServletResponse.getStatus());
 	 }
 	 
-	 
+	 @Test
+	 public void testDeleteManagerById() throws Exception{
+		 String URI = "/api/v2/Manager/{id}";
+		  Manager manager=new Manager();
+	    	manager.setManagerId(1);
+	    	manager.setManagerName("MARINA");
+	    	manager.setManagerEmail("s@gmail.com");
+	    	manager.setManagerPhone("08512");
+	    	
+	    	managerService.deleteManager(manager.getManagerId());
+	 }
+	 @Test
+	    public void testUpdateManagerById() throws Exception{
+	    	 String URI= "/api/v2/Manager/{id}";
+	    	 Manager manager=new Manager();
+		    	manager.setManagerId(1);
+		    	manager.setManagerName("MARINA");
+		    	manager.setManagerEmail("marinas@gmail.com");
+		    	manager.setManagerPhone("08512");
+		    	 String jsonInput = this.converttoJson(manager);
+		    		Mockito.when(managerService.updateManager(Mockito.any(), Mockito.any())).thenReturn(manager);
+			    	 MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.put(URI, 3).accept(MediaType.APPLICATION_JSON).content(jsonInput).contentType(MediaType.APPLICATION_JSON))
+			                 .andReturn();
+			         MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
+			         String jsonOutput = mockHttpServletResponse.getContentAsString();
+
+			         assertThat(jsonInput).isEqualTo(jsonOutput);  	 
+	    }
+	    
+	    @Test
+	    public void testGetAllManagers() throws Exception{
+	    	
+	       String URI= "/api/v2/Manager";
+	    	Manager manager1=new Manager();
+	    	manager1.setManagerId(1);
+	    	manager1.setManagerName("MARINA");
+	    	manager1.setManagerEmail("marinas@gmail.com");
+	    	manager1.setManagerPhone("08512");
+	    	
+	    	Manager manager2=new Manager();
+	    	manager2.setManagerId(0);
+	    	manager2.setManagerName("MARINA");
+	    	manager2.setManagerEmail("marinas@gmail.com");
+	    	manager2.setManagerPhone("08512");
+	    	
+	    	List<Manager> managerlist=new ArrayList<>();
+	    	managerlist.add(manager1);
+	    	managerlist.add(manager2);
+	    	
+	    	String jsonInput = this.converttoJson(managerlist);
+	    	Mockito.when(managerService.getAllManager()).thenReturn(managerlist);
+	    	MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get(URI).accept(MediaType.APPLICATION_JSON)).andReturn();
+	        MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
+	        String jsonOutput = mockHttpServletResponse.getContentAsString();
+
+	        assertThat(jsonInput).isEqualTo(jsonOutput);
+	  
+	    }
 	 
 
 	  /**

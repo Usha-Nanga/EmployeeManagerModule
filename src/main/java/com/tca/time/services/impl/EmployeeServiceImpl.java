@@ -19,34 +19,35 @@ import com.tca.time.services.EmployeeService;
 public class EmployeeServiceImpl implements EmployeeService{
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	public Employee createEmployee( @RequestBody Employee employee) {
-		return  employeeRepository.save(employee);
-	}	
-
- public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Integer employeeId,
-		 @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
-	Employee employee = employeeRepository.findById(employeeId)
-			.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-	employee.setEmployeeId(employeeDetails.getEmployeeId());
-	employee.setEmployeeName(employeeDetails.getEmployeeName());
-	employee.setEmployeeEmail(employeeDetails.getEmployeeEmail());
-	employee.setEmployeePhone(employeeDetails.getEmployeePhone());
-	final Employee updatedEmployee = employeeRepository.save(employee);
-	return ResponseEntity.ok(updatedEmployee); 
-} 
- 
- public boolean deleteEmployeeById(@PathVariable(value = "id") Integer employeeId)
-			throws ResourceNotFoundException {
-	 Employee employee = employeeRepository.findById(employeeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-
-		employeeRepository.delete(employee);
-		return true;
-}
-
- public List<Employee> getAllEmployee() {
-		 return employeeRepository.findAll();
+	
+	
+	 public Employee createEmployee( Employee employee) {
+			return  employeeRepository.save(employee);
 		}
+	 
+	 public Employee updateEmployee( Integer employeeId,
+			 Employee employeeDetails){
+		Employee employee = employeeRepository.findById(employeeId).get();
+		employee.setEmployeeId(employeeDetails.getEmployeeId());
+		employee.setEmployeeName(employeeDetails.getEmployeeName());
+		employee.setEmployeeEmail(employeeDetails.getEmployeeEmail());
+		employee.setEmployeePhone(employeeDetails.getEmployeePhone());
+		final Employee updatedEmployee = employeeRepository.save(employee);
+		return updatedEmployee; 
+		
+	}
+	 
+	 public boolean deleteEmployee(Integer employeeId)
+				throws ResourceNotFoundException {
+		 Employee employee = employeeRepository.findById(employeeId).get();
+
+			employeeRepository.delete(employee);
+			return true;
+	}
+	 
+	 public List<Employee> getAllEmployee() {
+			return employeeRepository.findAll();
+		} 
 
 	
 }

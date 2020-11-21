@@ -26,27 +26,25 @@ public class ManagerServiceImpl  implements ManagerService {
 	private ManagerRepository managerRepository;
 	
 	
-	 public Manager createManager( @RequestBody Manager manager) {
+	 public Manager createManager( Manager manager) {
 			return  managerRepository.save(manager);
 		}
 	 
-	 public ResponseEntity<Manager> updateManager(@PathVariable(value = "id") Integer managerId,
-			 @RequestBody Manager managerDetails) throws ResourceNotFoundException {
-		Manager manager = managerRepository.findById(managerId)
-				.orElseThrow(() -> new ResourceNotFoundException("Company Manager not found for this id :: " + managerId));
+	 public Manager updateManager( Integer managerId,
+			 Manager managerDetails){
+		Manager manager = managerRepository.findById(managerId).get();
 		manager.setManagerId(managerDetails.getManagerId());
 		manager.setManagerName(managerDetails.getManagerName());
 		manager.setManagerEmail(managerDetails.getManagerEmail());
 		manager.setManagerPhone(managerDetails.getManagerPhone());
 		final Manager updatedManager = managerRepository.save(manager);
-		return ResponseEntity.ok(updatedManager); 
+		return updatedManager; 
 		
 	}
 	 
-	 public boolean deleteManager(@PathVariable(value = "id") Integer managerId)
+	 public boolean deleteManager(Integer managerId)
 				throws ResourceNotFoundException {
-		 Manager manager = managerRepository.findById(managerId)
-					.orElseThrow(() -> new ResourceNotFoundException(" Manager not found for this id :: " + managerId));
+		 Manager manager = managerRepository.findById(managerId).get();
 
 			managerRepository.delete(manager);
 			return true;

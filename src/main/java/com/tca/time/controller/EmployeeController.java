@@ -2,6 +2,8 @@ package com.tca.time.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.tca.time.exception.ResourceNotFoundException;
 import com.tca.time.model.Employee;
 import com.tca.time.services.EmployeeService;
@@ -20,31 +21,33 @@ import com.tca.time.services.EmployeeService;
 @RestController
 @RequestMapping("/api/v2")
 public class EmployeeController {
+	private static final Logger logger = LogManager.getLogger(EmployeeController.class);
 	
 	@Autowired
 	private EmployeeService employeeService;
 
-	@GetMapping("/Employee")
-	public List<Employee> getAllEmployee() {
-		return employeeService.getAllEmployee();
-	} 
-	
 	@PostMapping("/CreateEmployee")
 	public Employee createEmployee( @RequestBody Employee employee) {
 		return employeeService.createEmployee(employee);
 	} 
 	
 	@PutMapping("/Employee/{id}")
-	public ResponseEntity<ResponseEntity<Employee>> updateEmployee(@PathVariable(value = "id") Integer employeeId,
+	public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Integer employeeId,
 			 @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
-		ResponseEntity<Employee>  employee = employeeService.updateEmployee(employeeId, employeeDetails);
+		Employee employee = employeeService.updateEmployee(employeeId, employeeDetails);
 		return  ResponseEntity.ok(employee);
 	}
 
-	@DeleteMapping("/deleteEmployee/{id}")	
-	public boolean deleteEmployeeById(@PathVariable(value = "id") Integer employeeId,
-			 @RequestBody Employee employeeDetails) throws ResourceNotFoundException	{
-		boolean employee = employeeService.deleteEmployeeById(employeeId);
-		return true;
-	}  
+
+	@DeleteMapping("/Employee/{id}")	
+	public ResponseEntity<Boolean> deleteEmployee(@PathVariable(value = "id") Integer employeeId) throws ResourceNotFoundException	{
+		
+		boolean employee = employeeService.deleteEmployee(employeeId);
+		return  ResponseEntity.ok(employee);
+	}
+	
+	@GetMapping("/Employee")
+	public List<Employee> getAllEmployee() {
+		return employeeService.getAllEmployee();
+	} 
 }

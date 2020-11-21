@@ -73,24 +73,6 @@ public class ManagerServiceImplTest {
 	    	System.out.println(managerRepository.findById(1));
 	    	 Assert.assertTrue(managerRepository.findById(1).isEmpty());    
 	  }  
-	@Test
-	public void testUpdateManagerById() throws Exception{
-		Manager manager=new Manager();
-    	manager.setManagerId(1);
-    	manager.setManagerName("MARINA");
-    	manager.setManagerEmail("marinas@gmail.com");
-    	manager.setManagerPhone("0851223243");
-    	
-    	System.out.println( Mockito.when(managerRepository.save(manager)).thenReturn(manager));
-    	  manager.setManagerEmail("amrutha@gmail.com");
-    	  
-     	 System.out.println(manager.getManagerEmail());
-     	 System.out.println( Mockito.when(managerRepository.findById(3).get()).thenReturn(manager));
- 
-	}  
-	
-	  
-	
-	  
+  
 	 
 }
