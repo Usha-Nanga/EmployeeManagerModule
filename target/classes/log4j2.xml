@@ -9,27 +9,20 @@
         <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
-        
-      <File name="loggerfile.txt" fileName="E:/loggerfile.txt">
-      <PatternLayout>
-        <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
-      </PatternLayout>
-    </File>
-    
+
     
     </Appenders>
     <Loggers>
         <Logger name="com.tca.time" level="info" additivity="false">
          
             <AppenderRef ref="ConsoleAppender" />
-                 <AppenderRef ref="fileAppender" />
+                 
             
             
         </Logger>
 
         <Root level="info">
             <AppenderRef ref="ConsoleAppender" />
-              <AppenderRef ref="fileAppender" />
         </Root>
     </Loggers>
     

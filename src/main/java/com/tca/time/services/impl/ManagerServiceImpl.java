@@ -27,8 +27,7 @@ public class ManagerServiceImpl  implements ManagerService {
 		manager.setManagerName(managerDetails.getManagerName());
 		manager.setManagerEmail(managerDetails.getManagerEmail());
 		manager.setManagerPhone(managerDetails.getManagerPhone());
-		final Manager updatedManager = managerRepository.save(manager);
-		return updatedManager; 
+		return managerRepository.save(manager); 
 		
 	}
 	 

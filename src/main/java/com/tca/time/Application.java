@@ -15,7 +15,6 @@ public class Application implements ApplicationRunner{
 	 private static final Logger logger = LogManager.getLogger(Application.class);
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		System.out.println("started");
 	}
 	@Override
     public void run(ApplicationArguments applicationArguments) throws Exception {

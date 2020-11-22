@@ -48,7 +48,7 @@ public class ManagerRepositoryTest {
 
 	        List< Manager > managers= (List< Manager >)  ManagerRepository.findAll();
 	  	  
-	        Assert.assertEquals(managers.size(), 1);
+	        Assert.assertEquals(1,managers.size());
 
 	    }
 	    @Test

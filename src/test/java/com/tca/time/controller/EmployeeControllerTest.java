@@ -34,7 +34,7 @@ class EmployeeControllerTest {
     private EmployeeService employeeService;
 
 	 @Test
-	   public void testNewEmployee() throws Exception{
+	    void testNewEmployee() throws Exception{
 		  String URI = "/api/v2/CreateEmployee";
 		  Employee employee=new Employee();
 		  employee.setEmployeeId(1);
@@ -58,7 +58,7 @@ class EmployeeControllerTest {
 	    }
 	 
 	 @Test
-	 public void testDeleteEmployeeById() throws Exception{
+	  void testDeleteEmployeeById() throws Exception{
 		 String URI = "/api/v2/Employee/{id}";
 		 Employee employee=new Employee();
 	    	employee.setEmployeeId(3);
@@ -69,7 +69,7 @@ class EmployeeControllerTest {
 	  }
 
 	    @Test
-	    public void testGetAllEmployees() throws Exception{
+	     void testGetAllEmployees() throws Exception{
 	    	
 	    	String URI= "/api/v2/Employee";
 	    	Employee employee1=new Employee();
@@ -98,7 +98,7 @@ class EmployeeControllerTest {
 	  
 	    }
 	    @Test
-	    public void testUpdateEmployee() throws Exception{
+	     void testUpdateEmployee() throws Exception{
 	    	
 	     String URI= "/api/v2/Employee/{id}";
 	     Employee employee=new Employee();

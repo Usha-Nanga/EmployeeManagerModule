@@ -92,7 +92,7 @@ class EmployeeRepositoryTest {
 	        
 
 	    List<Employee> employees = (List<Employee>)employeeRepository.findAll();
-	    Assert.assertEquals(employees.size(), 1);      
+	    Assert.assertEquals(1,employees.size());      
 
  }  
 

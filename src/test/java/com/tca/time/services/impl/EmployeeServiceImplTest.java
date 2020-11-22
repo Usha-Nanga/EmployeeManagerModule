@@ -27,7 +27,7 @@ class EmployeeServiceImplTest {
 	  private EmployeeService employeeService;
 	  
 	  @Test
-	    public  void testCreateEmployee() throws Exception{
+	      void testCreateEmployee() throws Exception{
 		  Employee employee=new Employee();
 	    	employee.setEmployeeId(1);
 	    	employee.setEmployeeName("MARINA");
@@ -38,7 +38,7 @@ class EmployeeServiceImplTest {
 	    }
 	  
 	  @Test
-	    public void testGetAllEmployee() throws Exception{
+	     void testGetAllEmployee() throws Exception{
 		  Employee employee1=new Employee();
 	    	employee1.setEmployeeId(1);
 	    	employee1.setEmployeeName("MARINA");
@@ -59,7 +59,7 @@ class EmployeeServiceImplTest {
 	    	
 	  }  
 	  @Test
-	    public void testDeleteEmployee() throws Exception{
+	     void testDeleteEmployee() throws Exception{
 		  Employee employee=new Employee();
 	    	employee.setEmployeeId(1);
 	    	employee.setEmployeeName("MARINA");
@@ -70,7 +70,7 @@ class EmployeeServiceImplTest {
 	    	 Assert.assertTrue(employeeRepository.findById(1).isEmpty());    
 	  }  
 	  @Test
-		public void testUpdateEmployee() throws Exception{
+		 void testUpdateEmployee() throws Exception{
 			Employee employee2=new Employee();
 	    	employee2.setEmployeeId(6);
 	    	employee2.setEmployeeName("MARINA");
