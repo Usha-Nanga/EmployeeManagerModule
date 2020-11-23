@@ -12,21 +12,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.tca.time.exception.ResourceNotFoundException;
+import com.tca.time.model.Employee;
 import com.tca.time.model.Manager;
 import com.tca.time.services.ManagerService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value="ManagerController",description="REST Apis related to Manager Entity!!!")
 @RestController
 @RequestMapping("/api/v2")
 public class ManagerController {
 	@Autowired
 	private ManagerService managerService;
-
+	@ApiOperation(value ="Adding a new Manager in the System",response=Manager.class,tags="ManagerController")
 	@PostMapping("/CreateManager")
 	public Manager createManger( @RequestBody Manager manager) {
 		return managerService.createManager(manager);
 	} 
-	
+	@ApiOperation(value ="Updating the Manager info in the System",response=Manager.class,tags="ManagerController")
 	@PutMapping("/Manager/{id}")
 	public ResponseEntity<Manager> updateManager(@PathVariable(value = "id") Integer managerId,
 			 @RequestBody Manager managerDetails) throws ResourceNotFoundException {
@@ -34,14 +38,14 @@ public class ManagerController {
 		return  ResponseEntity.ok(manager);
 	}
 
-
+	@ApiOperation(value ="Deleting the Manager by ID in the System",response=Manager.class,tags="ManagerController")
 	@DeleteMapping("/Manager/{id}")	
 	public ResponseEntity<Boolean> deleteManager(@PathVariable(value = "id") Integer managerId) throws ResourceNotFoundException	{
 		
 		boolean manager = managerService.deleteManager(managerId);
 		return  ResponseEntity.ok(manager);
 	}
-	
+	@ApiOperation(value ="Get List of Managers in the System",response=Manager.class,tags="ManagerController")
 	@GetMapping("/Manager")
 	public List<Manager> getAllManager() {
 		return managerService.getAllManager();

@@ -5,16 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name ="MANAGER")
 public class Manager {
-	@Column(name="manger_Id")
+	@Column
+	@ApiModelProperty(notes="Phone Number of the Manager",name="managerId",required=true,value="test id")
 	private int managerId;	
-	@Column(name="manger_name")
+	@Column
+	@ApiModelProperty(notes="Phone Number of the Manager",name="managerName",required=true,value="test name")
 	private String managerName;
-	@Column(name="manger_email")
+	@Column
+	@ApiModelProperty(notes="Phone Number of the Manager",name="managerEmail",required=true,value="test email")
 	private String managerEmail;
-	@Column(name="manger_phone")
+	@Column
+	@ApiModelProperty(notes="Phone Number of the Manager",name="managerPhone",required=true,value="test number")
 	private String managerPhone;
     
 	public Manager()

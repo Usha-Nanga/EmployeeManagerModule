@@ -5,32 +5,27 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity 
 @Table(name ="EMPLOYEE")
 public class Employee {
-	
-    @Column(name="employee_Id")
+    @Column
+	@ApiModelProperty(notes="ID of the Employee",name="employeeId",required=true,value="test id")
 	private int employeeId;
-    @Column(name="employee_name")
+    @Column
+    @ApiModelProperty(notes="Name of the Employee",name="employeeName",required=true,value="test name")
 	private String employeeName;
-    @Column(name="employee_email")
+    @Column
+    @ApiModelProperty(notes="Email of the Employee",name="employeeEmail",required=true,value="test email")
  	private String employeeEmail;
-    @Column(name="employee_phone")
+    @Column
+    @ApiModelProperty(notes="Phone Number of the Employee",name="employeePhone",required=true,value="test number")
 	private String employeePhone;
     
 	public Employee() {
 		
 	}
-
-//	public Employee(int employeeId, String employeeName, String employeeEmail,
-//			String employeePhone) {
-//		super();
-//		this.employeeId = employeeId;
-//		this.employeeName = employeeName;
-//		this.employeeEmail = employeeEmail;
-//		this.employeePhone = employeePhone;
-//	}
-	
 	@Id
 	@Column(name = "employee_id", nullable = false)
 	public int getEmployeeId() {
