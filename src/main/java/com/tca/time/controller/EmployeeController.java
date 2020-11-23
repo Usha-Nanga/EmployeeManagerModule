@@ -47,12 +47,6 @@ public class EmployeeController {
 		return  ResponseEntity.ok(employee);
 	}
 	@ApiOperation(value ="Get list of Employees in the System",response=Iterable.class,tags="EmployeeController")
-//	@ApiResponses(value= {
-//			@ApiResponse(code=200,message="Success|OK"),
-//			@ApiResponse(code=401,message="not Authorized!"),
-//			@ApiResponse(code=403,message="forbidden!"),
-//			@ApiResponse(code=404,message="not found!!!")	
-//	})
 	@GetMapping("/Employee")
 	public List<Employee> getAllEmployee() {
 		return employeeService.getAllEmployee();
