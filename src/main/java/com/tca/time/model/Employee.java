@@ -22,14 +22,14 @@ public class Employee {
 		
 	}
 
-	public Employee(int employeeId, String employeeName, String employeeEmail,
-			String employeePhone) {
-		super();
-		this.employeeId = employeeId;
-		this.employeeName = employeeName;
-		this.employeeEmail = employeeEmail;
-		this.employeePhone = employeePhone;
-	}
+//	public Employee(int employeeId, String employeeName, String employeeEmail,
+//			String employeePhone) {
+//		super();
+//		this.employeeId = employeeId;
+//		this.employeeName = employeeName;
+//		this.employeeEmail = employeeEmail;
+//		this.employeePhone = employeePhone;
+//	}
 	
 	@Id
 	@Column(name = "employee_id", nullable = false)
@@ -68,12 +68,12 @@ public class Employee {
 		this.employeePhone = employeePhone;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName + ", employeeEmail=" + employeeEmail + ", employeePhone=" + employeePhone
-				+ "]";
-	}
-	
+//	@Override
+//	public String toString() {
+//		return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName + ", employeeEmail=" + employeeEmail + ", employeePhone=" + employeePhone
+//				+ "]";
+//	}
+//	
 	
    
 	   

@@ -21,7 +21,7 @@ public class Manager {
 	{
 		
 	}
-
+//
 	public Manager(int managerId, String managerName, String managerEmail,
 			String managerPhone) {
 		super();
@@ -31,12 +31,12 @@ public class Manager {
 		this.managerPhone = managerPhone;
 	}
 
-	@Override
-	public String toString() {
-		return "Manager [managerId=" + managerId + ", managerName="
-				+ managerName + ", managerEmail=" + managerEmail + ", managerPhone="
-				+ managerPhone + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Manager [managerId=" + managerId + ", managerName="
+//				+ managerName + ", managerEmail=" + managerEmail + ", managerPhone="
+//				+ managerPhone + "]";
+//	}
 	
 	@Id
 	@Column(name = "manager_id", nullable = false)
