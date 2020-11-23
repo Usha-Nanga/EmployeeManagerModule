@@ -8,10 +8,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name ="MANAGER")
 public class Manager {
-	
+	@Column(name="manger_Id")
 	private int managerId;	
+	@Column(name="manger_name")
 	private String managerName;
+	@Column(name="manger_email")
 	private String managerEmail;
+	@Column(name="manger_phone")
 	private String managerPhone;
     
 	public Manager()
