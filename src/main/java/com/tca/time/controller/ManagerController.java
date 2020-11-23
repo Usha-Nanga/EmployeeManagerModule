@@ -25,12 +25,12 @@ import io.swagger.annotations.ApiOperation;
 public class ManagerController {
 	@Autowired
 	private ManagerService managerService;
-	@ApiOperation(value ="Adding a new Manager in the System",response=Manager.class,tags="ManagerController")
+	@ApiOperation(value ="Adding a new Manager to the System",response=Manager.class,tags="ManagerController")
 	@PostMapping("/CreateManager")
 	public Manager createManger( @RequestBody Manager manager) {
 		return managerService.createManager(manager);
 	} 
-	@ApiOperation(value ="Updating the Manager info in the System",response=Manager.class,tags="ManagerController")
+	@ApiOperation(value ="Updating the Manager info in the System by id",response=Manager.class,tags="ManagerController")
 	@PutMapping("/Manager/{id}")
 	public ResponseEntity<Manager> updateManager(@PathVariable(value = "id") Integer managerId,
 			 @RequestBody Manager managerDetails) throws ResourceNotFoundException {
@@ -45,7 +45,7 @@ public class ManagerController {
 		boolean manager = managerService.deleteManager(managerId);
 		return  ResponseEntity.ok(manager);
 	}
-	@ApiOperation(value ="Get List of Managers in the System",response=Manager.class,tags="ManagerController")
+	@ApiOperation(value ="Get List of Managers from the System",response=Manager.class,tags="ManagerController")
 	@GetMapping("/Manager")
 	public List<Manager> getAllManager() {
 		return managerService.getAllManager();
